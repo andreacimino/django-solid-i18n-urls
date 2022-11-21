@@ -1,5 +1,5 @@
-from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django.urls import include, re_path as url
 
 from solid_i18n.urls import solid_i18n_patterns
 
