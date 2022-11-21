@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
-from django.core.urlresolvers import clear_url_caches
-
+from django.urls import  clear_url_caches
+from django.urls import reverse
+from django.urls import include
+from django.utils import translation
 from .base import URLTestCaseBase
 
 

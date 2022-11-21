@@ -1,10 +1,12 @@
 import re
 from django.utils.translation import get_language
-from django.core.urlresolvers import LocaleRegexURLResolver, clear_url_caches
+from django.urls import  clear_url_caches
 from django.conf import settings
 from .memory import get_language_from_path
-
-
+from django.urls import LocalePrefixPattern as LocaleRegexURLResolver
+# from django.urls import (
+#         NoReverseMatch, URLPattern as RegexURLPattern, URLResolver as RegexURLResolver, ResolverMatch, Resolver404, get_script_prefix, reverse, reverse_lazy, resolve
+# )
 class SolidLocaleRegexURLResolver(LocaleRegexURLResolver):
     """
     A URL resolver that always matches the active language code as URL prefix,

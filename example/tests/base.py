@@ -12,7 +12,7 @@ except ImportError:
         pass
 from django.conf import settings
 from django.test import TestCase
-from django.core.urlresolvers import clear_url_caches
+from django.urls import  clear_url_caches
 from django.utils import translation
 try:
     from django.test.utils import TransRealMixin

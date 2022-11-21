@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
-from django.conf.urls import url
+from django.urls import reverse
+from django.urls import include, re_path as url
 from django.utils import translation
 from django.test.utils import override_settings
 from django.views.generic import TemplateView
