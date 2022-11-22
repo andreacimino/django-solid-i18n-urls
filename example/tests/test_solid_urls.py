@@ -136,24 +136,24 @@ class TranslationAccessTestCase(URLTestCaseBase):
     @override_settings(SOLID_I18N_PREFIX_STRICT=False)
     def test_about_page_strict_prefix_false(self):
         response = self.client.get("/my-slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "my")
+        self.assertEqual(response.headers.get("content-language"), "my")
         response = self.client.get("/ru/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "ru")
+        self.assertEqual(response.headers.get("content-language"), "ru")
         response = self.client.get("/pt-br/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "pt-br")
+        self.assertEqual(response.headers.get("content-language"), "pt-br")
         response = self.client.get("/pt-broughton/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "pt-br")
+        self.assertEqual(response.headers.get("content-language"), "pt-br")
 
     @override_settings(SOLID_I18N_PREFIX_STRICT=True)
     def test_about_page_strict_prefix_true(self):
         response = self.client.get("/my-slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "en")
+        self.assertEqual(response.headers.get("content-language"), "en")
         response = self.client.get("/ru/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "ru")
+        self.assertEqual(response.headers.get("content-language"), "ru")
         response = self.client.get("/pt-br/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "pt-br")
+        self.assertEqual(response.headers.get("content-language"), "pt-br")
         response = self.client.get("/pt-broughton/slug/")
-        self.assertEqual(response.headers.get("content-language")[-1], "en")
+        self.assertEqual(response.headers.get("content-language"), "en")
 
     @override_settings(SOLID_I18N_HANDLE_DEFAULT_PREFIX=True)
     def test_about_page_default_prefix_en_with_prefix_first(self):
