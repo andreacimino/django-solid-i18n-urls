@@ -72,6 +72,7 @@ class SolidLocaleMiddleware(LocaleMiddleware):
         language_from_path = get_language_from_path(request.path_info)
         urlconf = getattr(request, "urlconf", settings.ROOT_URLCONF)
         i18n_patterns_used = is_language_prefix_patterns_used(urlconf)
+
         if (
             getattr(settings, "SOLID_I18N_DEFAULT_PREFIX_REDIRECT", False)
             and language_from_path == self.default_lang

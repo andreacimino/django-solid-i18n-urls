@@ -33,11 +33,27 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
     def language_prefix(self):
         language_code = get_language() or settings.LANGUAGE_CODE
         # if language_code == settings.LANGUAGE_CODE and not self.prefix_default_language:
-        #   return ""
+        #    return ""
         # else:
         return "%s/" % language_code
 
     def match(self, path):
+        language_code = get_language() or settings.LANGUAGE_CODE
+        language_prefix = self.language_prefix
+
+        if language_code == settings.LANGUAGE_CODE and not self.prefix_default_language:
+            if path == language_code + "/":
+                if not settings.SOLID_I18N_HANDLE_DEFAULT_PREFIX:
+                    return None
+        #            import pdb
+
+        #           pdb.set_trace()
+        #     if path.startswith(language_prefix):
+        #         import pdb
+
+        #         pdb.set_trace()
+        #         return None
+
         language_prefix = self.language_prefix
         if path.startswith(language_prefix):
             return path[len(language_prefix) :], (), {}
