@@ -24,6 +24,28 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
         self.compiled_with_default = False
         self._regex_dict = {}
 
+    # @property
+    # def regex(self):
+    #     # This is only used by reverse() and cached in _reverse_dict.
+    #     return re.compile(re.escape(self.language_prefix))
+
+    @property
+    def language_prefix(self):
+        language_code = get_language() or settings.LANGUAGE_CODE
+        # if language_code == settings.LANGUAGE_CODE and not self.prefix_default_language:
+        #   return ""
+        # else:
+        return "%s/" % language_code
+
+    def match(self, path):
+        language_prefix = self.language_prefix
+        if path.startswith(language_prefix):
+            return path[len(language_prefix) :], (), {}
+
+        return path[0:], (), {}
+
+    #  return None
+
     @property
     def regex(self):
         """
@@ -37,7 +59,10 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
         Otherwise, all other urls will be reversed without default langauge
         prefix.
         """
+        #  import pdb
 
+        #  pdb.set_trace()
+        #
         language_code = get_language()
         handle_default_prefix = getattr(
             settings, "SOLID_I18N_HANDLE_DEFAULT_PREFIX", False

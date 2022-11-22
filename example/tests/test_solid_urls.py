@@ -296,7 +296,10 @@ class TranslationAccessTestCase(URLTestCaseBase):
 
     @override_settings(SOLID_I18N_USE_REDIRECTS=True)
     @override_settings(SOLID_I18N_HANDLE_DEFAULT_PREFIX=True)
-    def test_home_page_prefix_default_prefix_ru(self):
+    def test_home_page_prefix_default_prefix_ru1(self):
+        # import pdb
+
+        # pdb.set_trace()
         response = self.client.get("/en/", **self.ru_http_headers)
         self._base_page_check(response, "en", "home")
 
