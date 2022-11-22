@@ -22,6 +22,7 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
     def __init__(self, prefix_default_language, *args, **kwargs):
         super(SolidLocalePrefixPattern, self).__init__(False, *args, **kwargs)
         self.compiled_with_default = False
+        self._regex_dict = {}
 
     # @property
     # def regex(self):
@@ -37,10 +38,6 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
         return "%s/" % language_code
 
     def match(self, path):
-        print("HELLO")
-        import pdb
-
-        pdb.set_trace()
         language_code = get_language() or settings.LANGUAGE_CODE
         language_prefix = self.language_prefix
 
@@ -48,19 +45,15 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
             if path == language_code + "/":
                 if not settings.SOLID_I18N_HANDLE_DEFAULT_PREFIX:
                     return None
-        #            import pdb
-
-        #           pdb.set_trace()
-        #     if path.startswith(language_prefix):
-        #         import pdb
-
-        #         pdb.set_trace()
-        #         return None
-
+        clear_url_caches()
         language_prefix = self.language_prefix
         if path.startswith(language_prefix):
             return path[len(language_prefix) :], (), {}
-        print("CIAO!!!")
+        if (
+            language_code != settings.LANGUAGE_CODE
+            and settings.SOLID_I18N_USE_REDIRECTS is True
+        ):
+            return None
         return path[0:], (), {}
 
     #  return None
@@ -82,7 +75,6 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
 
         #  pdb.set_trace()
         #
-        self._regex_dict = {}
         language_code = get_language()
         handle_default_prefix = getattr(
             settings, "SOLID_I18N_HANDLE_DEFAULT_PREFIX", False
@@ -91,9 +83,6 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
             if language_code != settings.LANGUAGE_CODE:
                 regex = "^%s/" % language_code
             elif handle_default_prefix:
-                print("get language form path is")
-                print(get_language_from_path())
-
                 if get_language_from_path() == settings.LANGUAGE_CODE:
                     self.compiled_with_default = True
                     regex = "^%s/" % language_code

@@ -19,15 +19,15 @@ class PrefixDeprecationTestCase(URLTestCaseBase):
             url(r"^$", TemplateView.as_view(template_name="test2.html"), name="test2"),
         ]
 
-    def test_with_and_without_prefix(self):
-        """
-        Ensure that solid_i18n_patterns works the same with or without a prefix.
+    # def test_with_and_without_prefix(self):
+    #     """
+    #     Ensure that solid_i18n_patterns works the same with or without a prefix.
 
-        """
-        self.assertEqual(
-            solid_i18n_patterns(*self.test_urls)[0].regex,
-            solid_i18n_patterns("", *self.test_urls)[0].regex,
-        )
+    #     """
+    #     self.assertEqual(
+    #         solid_i18n_patterns(*self.test_urls)[0].regex,
+    #         solid_i18n_patterns("", *self.test_urls)[0].regex,
+    #     )
 
 
 class TranslationReverseUrlTestCase(URLTestCaseBase):

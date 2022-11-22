@@ -59,17 +59,12 @@ class SolidLocaleMiddleware(LocaleMiddleware):
         urlconf = getattr(request, "urlconf", settings.ROOT_URLCONF)
         check_path = is_language_prefix_patterns_used(urlconf)
         language_path = get_language_from_path(request.path_info)
-        import pdb
 
-        pdb.set_trace()
         if check_path and not self.use_redirects:
             language = language_path or self.default_lang
         else:
             language = trans.get_language_from_request(request, check_path)
-        import pdb
 
-        pdb.set_trace()
-        print(language_path)
         set_language_from_path(language_path)
         trans.activate(language)
         request.LANGUAGE_CODE = trans.get_language()
