@@ -16,7 +16,7 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
     but for default language non prefix is used.
 
     Rather than taking a regex argument, we just override the ``regex``
-    function to always return the active language-code as regex.
+    function to always return the abtive language-code as regex.
     """
 
     def __init__(self, prefix_default_language, *args, **kwargs):
@@ -45,7 +45,7 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
             if path == language_code + "/":
                 if not settings.SOLID_I18N_HANDLE_DEFAULT_PREFIX:
                     return None
-        clear_url_caches()
+        #      clear_url_caches()
         language_prefix = self.language_prefix
         if path.startswith(language_prefix):
             return path[len(language_prefix) :], (), {}
@@ -111,6 +111,6 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
                 regex = "^%s/" % language_code
                 self.compiled_with_default = True
             if regex is not None:
-                clear_url_caches()
+                # clear_url_caches()
                 self._regex_dict[language_code] = re.compile(regex, re.UNICODE)
         return self._regex_dict[language_code]
