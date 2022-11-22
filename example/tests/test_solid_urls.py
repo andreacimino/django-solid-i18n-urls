@@ -177,6 +177,7 @@ class TranslationAccessTestCase(URLTestCaseBase):
         self._base_page_check(response, "en", "about")
         self.assertTrue("<test>/about/</test>" in str(response.content))
         # with prefix
+        print("ERRORE QUA")
         response = self.client.get("/en/about/")
         self._base_page_check(response, "en", "about")
         self.assertTrue("<test>/en/about/</test>" in str(response.content))
