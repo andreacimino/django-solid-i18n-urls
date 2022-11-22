@@ -19,10 +19,8 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
     function to always return the active language-code as regex.
     """
 
-    def __init__(self, prefix_default_language=True, *args, **kwargs):
-        super(SolidLocalePrefixPattern, self).__init__(
-            prefix_default_language, *args, **kwargs
-        )
+    def __init__(self, prefix_default_language, *args, **kwargs):
+        super(SolidLocalePrefixPattern, self).__init__(False, *args, **kwargs)
         self.compiled_with_default = False
         self._regex_dict = {}
 
@@ -39,6 +37,7 @@ class SolidLocalePrefixPattern(LocalePrefixPattern):
         Otherwise, all other urls will be reversed without default langauge
         prefix.
         """
+
         language_code = get_language()
         handle_default_prefix = getattr(
             settings, "SOLID_I18N_HANDLE_DEFAULT_PREFIX", False
