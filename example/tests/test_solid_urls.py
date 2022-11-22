@@ -70,7 +70,7 @@ class TranslationAccessTestCase(URLTestCaseBase):
     def _check_vary_accept_language(self, response):
         from django.conf import settings
 
-        vary = response.headers.get("vary", ("", ""))[-1]
+        vary = response.headers.get("vary", "")
         if settings.SOLID_I18N_USE_REDIRECTS:
             req_path = response.request["PATH_INFO"]
             if req_path.startswith("/en") or req_path.startswith("/ru"):
